@@ -1,0 +1,33 @@
+import sys
+import timeit
+start = timeit.default_timer()
+
+
+N, cnt = int(sys.stdin.readline()), 0
+
+temp = [0]*N
+
+def chk(idx):
+    for i in range(idx):
+        if abs(temp[idx]-temp[i])== idx-i or temp[idx] == temp[i]:
+            return False
+
+    return True
+
+def cnt_case(depth):
+    global cnt
+    if depth==N:
+        cnt+=1
+        return
+    else:
+        for i in range(N):
+            temp[depth]=i
+            if chk(depth):
+                cnt_case(depth+1)
+        
+cnt_case(0)
+print(cnt)
+
+
+stop = timeit.default_timer()
+print(stop - start)

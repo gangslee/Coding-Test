@@ -1,0 +1,32 @@
+import sys
+from collections import Counter
+
+N = int(sys.stdin.readline())
+l=[]
+
+for i in range(N):
+    l.append(int(sys.stdin.readline()))
+
+if N==1:
+    print(l[0])
+    print(l[0])
+    print(l[0])
+    print(0)
+    sys.exit()
+
+l = sorted(l)
+print(round(sum(l)/N))
+
+print(l[N//2])
+
+
+cnt=Counter(l)
+cnt = sorted(cnt.items(), key=lambda x: (-x[1],x[0]))
+if cnt[0][1]!=cnt[1][1]:
+    print(cnt[0][0])
+else:
+    print(cnt[1][0])
+# 리스트 l에서 최빈값 구하기 여기서는 두번째로 많이 나온 값
+
+
+print(l[-1]-l[0])

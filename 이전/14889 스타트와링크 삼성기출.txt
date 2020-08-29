@@ -1,0 +1,22 @@
+import sys
+import itertools
+
+n = int(sys.stdin.readline())
+a,b,c = [],[i for i in range(n)], []
+for i in range(n):
+    a.append(list(map(int,sys.stdin.readline().split())))
+
+cases= list(itertools.combinations(b,int(n/2)))
+n2 = int(len(cases)/2)
+
+def chkResult(temp):
+    result = 0
+    sumList = list(itertools.combinations(temp,2))
+    for i in range(len(sumList)):
+        result+=(a[sumList[i][0]][sumList[i][1]]+a[sumList[i][1]][sumList[i][0]])
+    return result
+
+for i in range(n2):
+    c.append(abs(chkResult(cases[i])-chkResult(cases[len(cases)-1-i])))
+
+print(min(c))

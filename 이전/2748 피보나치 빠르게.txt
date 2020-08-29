@@ -1,0 +1,49 @@
+#else 부문에서 함수 2개쓰기와 하나쓰기에서 차이가 나는듯함
+
+import sys
+
+n = int(sys.stdin.readline())
+
+def fibo(f):
+    if f==0:
+        return 0
+    elif f==1:
+        return 1
+    else:
+        return fibo(f-2)+fibo(f-1)
+
+
+print(fibo(n))
+
+
+###############풀이#################
+import sys
+
+n = int(sys.stdin.readline())
+
+def fibo(f1, f2, cnt):
+    fn = f1+f2
+    if cnt==0:
+        return fn
+    else:
+        return fibo(f2,fn,cnt-1)
+
+if n == 0:
+    print(0)
+elif n<3:
+    print(1)
+else:
+    print(fibo(1,1,n-3))
+
+############피보나치 for문############
+import sys
+
+n = int(sys.stdin.readline())
+
+s=0
+e=1
+
+for i in range(n-1):
+    s,e = e, s+e
+print(e)
+

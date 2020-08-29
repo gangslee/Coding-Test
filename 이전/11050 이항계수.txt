@@ -1,0 +1,7 @@
+import sys
+import math
+
+two = list(map(int, sys.stdin.readline().split()))
+
+result = math.factorial(two[0])//(math.factorial(two[1])*math.factorial(two[0]-two[1]))
+print(result)

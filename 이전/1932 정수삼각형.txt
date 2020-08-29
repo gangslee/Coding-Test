@@ -1,0 +1,18 @@
+import sys
+
+n, tri = int(sys.stdin.readline()), []
+for i in range(n):
+    tri.append(list(map(int, sys.stdin.readline().split())))
+
+
+for i in range(n-1):
+    for j in range(len(tri[i+1])):
+        if j==0:
+            tri[i+1][j] += tri[i][j]
+        elif j==len(tri[i+1])-1:
+            tri[i+1][j] += tri[i][j-1]
+        else:
+            tri[i+1][j] += max(tri[i][j-1], tri[i][j])
+
+
+print(max(tri[n-1]))

@@ -1,0 +1,11 @@
+import sys
+import math
+
+n = int(sys.stdin.readline())
+ring = list(map(int, sys.stdin.readline().split()))
+
+first = ring[0]
+
+for i in range(1, len(ring)):
+    gcd = math.gcd(first, ring[i])
+    print(str(first//gcd)+"/"+str(ring[i]//gcd))

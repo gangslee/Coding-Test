@@ -1,0 +1,19 @@
+import sys
+
+n = int(sys.stdin.readline())
+podo = [0]
+result = [0]
+cnt=0
+
+for i in range(n):
+    podo.append(int(input()))
+
+podo.append(0)
+
+result.append(podo[1])
+result.append(podo[2]+podo[1])
+
+for i in range(3, n+1):
+    result.append(max(result[i-3]+podo[i-1]+podo[i], result[i-1], result[i-2]+podo[i]))
+    #i-3까지 먹은 상태에 i-1을 먹고 i를 먹음, i를 먹지 않음, i-2를 먹고 i를 먹음
+print(result[n])

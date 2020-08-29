@@ -1,0 +1,15 @@
+import sys
+import itertools
+
+N, M = map(int, sys.stdin.readline().split())
+ns = [i for i in range(1,N+1)]
+
+for num in itertools.permutations(ns, M):
+    # permutations는 순열 중복X
+    # produce는 모든 순열 중복O itertools.product(list, repeat=숫자)
+    # combination은 조합 중복X
+    # combinations_with_replacement는 조합 중복O
+    
+    for i in num:
+        print(i, end=' ')
+    print(end='\n')

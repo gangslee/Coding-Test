@@ -1,0 +1,16 @@
+####한 쪽을 기준으로 정렬후 겹쳐지지 않는 가장 긴 경우의 길이를 n에서 빼줌####
+
+import sys
+from collections import deque
+
+n = int(sys.stdin.readline())
+ab = [list(map(int, sys.stdin.readline().split())) for i in range(n)]
+ab = sorted(ab, key=lambda x: x[0])
+result = [1]*n
+
+for i in range(n):
+    for j in range(i):
+        if ab[i][1]>ab[j][1]:
+            result[i] = max(result[i], result[j]+1)
+
+print(n-max(result))

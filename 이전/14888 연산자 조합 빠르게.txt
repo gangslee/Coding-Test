@@ -1,0 +1,28 @@
+import sys
+import itertools
+
+n = int(sys.stdin.readline())
+a = list(map(int,sys.stdin.readline().split()))
+plus, minus, multi, slash = map(int,sys.stdin.readline().split())
+
+minNum, maxNum = 1e9, -1e9
+
+def calculate(i, result, add, sub, mul ,sla):
+    global minNum, maxNum
+    if i == n:
+        minNum = min(minNum, result)
+        maxNum = max(maxNum, result)
+        return
+
+    if add:
+        calculate(i+1, result+a[i], add-1, sub, mul, sla)
+    if sub:
+        calculate(i+1, result-a[i], add, sub-1, mul, sla)
+    if mul:
+        calculate(i+1, result*a[i], add, sub, mul-1, sla)
+    if sla:
+        calculate(i+1, int(result/a[i]), add, sub, mul, sla-1)
+
+calculate(1, a[0], plus, minus, multi, slash)
+print(maxNum)
+print(minNum)
