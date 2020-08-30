@@ -1,15 +1,16 @@
-p = ['119', '97674223', '1195524421']
+########알몸으로 다니지 않는 경우를 빼 주면 됨 동전 뒤집기처럼 생각##############
+######### EX : (hat1,hat2, 안입음)#############
+###########각 종류별로 n+1을 모두 곱하고 모두 '안입음'이 나올 경우 하나를 빼주면 됨############
 
-def solution(phone_book):
-    
-    for i in range(len(phone_book)):
-        for j in range(i+1, len(phone_book)):
-            
-            if (phone_book[i] in phone_book[j]):
-                return False
-                
+c = [['yellow_hat', 'headgear'], ['blue_sunglasses', 'eyewear'], ['green_turban', 'headgear']]
+d = {}
+for i in c:
+    if i[1] in d.keys():
+        d[i[1]] +=1
+    else:
+        d[i[1]] = 1
+answer = 1
+for i in d:
+    answer*=d[i]+1
 
-    
-    return True
-
-solution(p)
+print(answer-1)
