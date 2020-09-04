@@ -20,3 +20,5 @@ def solution(bridge_length, weight, truck_weights):
 
 
 print(solution(bridge_length, weight, truck_weights))
+
+# list sum 속도 ㅈㄴ느림
