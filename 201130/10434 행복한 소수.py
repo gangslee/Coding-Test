@@ -3,6 +3,9 @@ p = int(input())
 m = list()
 
 
+# 소수 확인 함수
+
+
 def chkPrime(a):
     if a < 2:
         return False
@@ -12,6 +15,8 @@ def chkPrime(a):
             return False
 
     return True
+
+# 행복한 소수 확인 함수
 
 
 def chkHappy(n):
