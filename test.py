@@ -1,28 +1,24 @@
-def solution(v):
-    answer = [0, 0, 0]
-    global gv
-    gv = v
+pan = list()
+for _ in range(10):
+    pan.append(list(map(int, input().split())))
 
-    for i in range(len(gv)):
-        for j in range(len(gv)):
-            if gv[i][j] < 3:
-                answer[gv[i][j]] += 1
-                checkVisit(i, j, len(gv))
+x, y = 1, 1
 
-    return answer
+while True:
+    pan[x][y] += 9
 
+    if pan[x][y] == 11:
+        pan[x][y] -= 2
+        break
 
-def checkVisit(i, j, length):
-    global gv
-    gv[i][j] += 3
-    if i > 0 and gv[i][j] % 3 == gv[i-1][j] % 3 and gv[i-1][j] < 3:
-        checkVisit(i-1, j, length)
-    if j > 0 and gv[i][j] % 3 == gv[i][j-1] % 3 and gv[i][j-1] < 3:
-        checkVisit(i, j-1, length)
-    if i < len(gv)-1 and gv[i][j] % 3 == gv[i+1][j] % 3 and gv[i+1][j] < 3:
-        checkVisit(i+1, j, length)
-    if j < len(gv)-1 and gv[i][j] % 3 == gv[i][j+1] % 3 and gv[i][j+1] < 3:
-        checkVisit(i, j+1, length)
+    if pan[x+1][y] == 1 and pan[x][y+1] == 1:
+        break
 
+    if pan[x][y+1] == 1:
+        x += 1
+    else:
+        y += 1
 
-print(solution([[0, 0, 1], [2, 2, 1], [0, 0, 0]]))
+for i in pan:
+    print(*i, end=" ")
+    print()
