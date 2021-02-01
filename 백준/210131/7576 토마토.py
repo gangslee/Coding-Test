@@ -35,7 +35,6 @@ def bfs(q):
                     temp.append((r, c))
                     tomato[r][c] = 1
         q = deque(temp)
-        print(tomato)
 
 
 if noZero:
