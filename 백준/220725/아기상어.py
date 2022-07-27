@@ -1,45 +1,68 @@
 from collections import deque
+from re import T
 
 N = int(input())
-shark = [2, 0]
+x, y, size = -1, -1, 2
 graph = []
 start = []
-result = [[0 for __ in range(N)] for _ in range(N)]
-visit = [[False for __ in range(N)] for _ in range(N)]
 direction = [(-1, 0), (0, -1), (1, 0), (0, 1)]
 
 for i in range(N):
-    row = list(map(int, input().split()))
+    graph.append(list(map(int, input().split())))
 
-    if 9 in row:
-        start = [i, row.index(9)]
+for i in range(N):
+    for j in range(N):
+        if graph[i][j] == 9:
+            x = i
+            y = j
 
-    graph.append(row)
 
+def bfs(x, y, size):
+    q = deque()
+    q.append((x, y))
 
-def bfs(start):
-    q = deque([start])
-    visit[start[0]][start[1]] = True
+    result = [[0 for __ in range(N)] for _ in range(N)]
+    visit = [[False for __ in range(N)] for _ in range(N)]
+    visit[x][y] = True
+    temp = []
 
     while q:
         current = q.popleft()
 
         for d in direction:
-            if graph[current[0]+d[0]][current[1]+d[1]] <= shark[0] and not visit[current[0]+d[0]][current[1]+d[1]]:
-                if 0 < graph[current[0]+d[0]][current[1]+d[1]] < shark[0]:
-                    shark[1] += 1
+            dx, dy = current[0]+d[0], current[1]+d[1]
 
-                    if shark[0] == shark[1]:
-                        shark[0] += 1
-                        shark[1] = 0
+            if 0 <= dx < N and 0 <= dy < N and not visit[dx][dy]:
+                if graph[dx][dy] <= size:
+                    q.append((dx, dy))
+                    visit[dx][dy] = True
+                    result[dx][dy] = result[current[0]][current[1]] + 1
 
-                visit[current[0]+d[0]][current[1]+d[1]] = True
-                q.append([current[0]+d[0], current[1]+d[1]])
-                result[current[0]+d[0]][current[1]+d[1]
-                                        ] = result[current[0]][current[1]] + 1
+                    if 0 < graph[dx][dy] < size:
+                        temp.append((dx, dy, result[dx][dy]))
 
-
-bfs(start)
+    return sorted(temp, key=lambda x: (-x[2], -x[0], -x[1]))
 
 
-# print(graph)
+cnt = 0
+result = 0
+
+while True:
+    shark = bfs(x, y, size)
+
+    if len(shark) == 0:
+        break
+
+    nx, ny, dist = shark.pop()
+
+    result += dist
+    graph[x][y], graph[nx][ny] = 0, 0
+
+    x, y = nx, ny
+    cnt += 1
+
+    if cnt == size:
+        size += 1
+        cnt = 0
+
+print(result)
